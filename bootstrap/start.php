@@ -20,7 +20,6 @@ $response = $container->get('Symfony\Component\HttpFoundation\Response');
 /**
  * Error Handler
  */
-//var_dump(getenv('MAIL_ENCRYPTION'));die();
 $whoops = new \Whoops\Run();
 
 if (config('app.debug') === 'true') {
@@ -57,7 +56,7 @@ $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
     }
 };
 
-$dispatcher = \FastRoute\simpleDispatche($routeDefinitionCallback);
+$dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPathInfo());
 
 switch ($routeInfo[0]) {
