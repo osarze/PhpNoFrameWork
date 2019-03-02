@@ -50,24 +50,14 @@ return [
     Twig_Environment::class => DI\factory(function (){
         $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '\views');
         $twig = new Twig_Environment($loader);
-
-//        $function = new \Twig_Function('base_uri', 'base_uri');
-//        $twig->addFunction($function);
-//        $function = new \Twig_Function('asset_url', 'asset_url');
-//        $twig->addFunction($function);
-//        $function = new \Twig_Function('url', 'url');
-//        $twig->addFunction($function);
-//
-//        $function = new \Twig_Function('env', 'env');
-//        $twig->addFunction($function);
-
         return $twig;
     }),
     \App\Core\View\Renderer::class => \Di\factory(function (\Psr\Container\ContainerInterface $container){
         $twigEnvironment = $container->get('Twig_Environment');
         $response = $container->get('Symfony\Component\HttpFoundation\Response');
         return new \App\Core\View\TwigRenderer($twigEnvironment, $response);
-    })
+    }),
+    \Doctrine\DBAL\Configuration()
 
 
 //    DI\create('App\Books')->constructor(\DI\create('App\User')->constructor(\DI\create('App\NestedDependency')))
